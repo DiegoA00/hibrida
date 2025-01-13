@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Feed de Noticias
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <ion-searchbar placeholder="Buscar noticias"></ion-searchbar>
+  
+  <ion-list>
+    <ion-item *ngFor="let noticia of noticias">
+      <ion-card>
+        <img [src]="noticia.imagen" alt="Imagen de la noticia"/>
+        <ion-card-header>
+          <ion-card-title>{{ noticia.titulo }}</ion-card-title>
+          <ion-card-subtitle>{{ noticia.fuente }} - {{ noticia.fecha}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-badge color="primary">{{ noticia.etiqueta }}</ion-badge>
+          <p>{{ noticia.descripcion }}</p>
+          <ion-button expand="full" color="secondary">Analizar Noticia</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  
+  <ion-segment (ionChange)="filtrarNoticias($event)">
+    <ion-segment-button value="politica">
+      <ion-label>Política</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="salud">
+      <ion-label>Salud</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="entretenimiento">
+      <ion-label>Entretenimiento</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
