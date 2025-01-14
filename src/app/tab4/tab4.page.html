@@ -1,47 +1,57 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Feed de Noticias
+    <ion-title id="title">
+      Noticias
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  
-  <ion-searchbar placeholder="Buscar noticias"></ion-searchbar>
-  
+
+  <ion-searchbar placeholder="Buscar noticias..." (ionInput)="filterNews($event)"></ion-searchbar>
+
   <ion-list>
-    <ion-item *ngFor="let noticia of noticias">
-      <ion-card>
-        <img [src]="noticia.imagen" alt="Imagen de la noticia"/>
-        <ion-card-header>
-          <ion-card-title>{{ noticia.titulo }}</ion-card-title>
-          <ion-card-subtitle>{{ noticia.fuente }} - {{ noticia.fecha}}</ion-card-subtitle>
+    <!-- <ion-segment (ionChange)="filtrarNoticias($event)">
+      <ion-segment-button value="politica">
+        <ion-label>Política</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="salud">
+        <ion-label>Salud</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="entretenimiento">
+        <ion-label>Entretenimiento</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab> -->
+
+    <ion-card class="news-card" *ngFor="let news of filteredNews" (click)="goToDetail(news)" class="card"
+      style="cursor: pointer;">
+      <div class="news-card-content">
+
+        <img [src]="news.image" alt="Imagen de la noticia" class="news-image" />
+  
+        <ion-card-header class="ion-text-wrap ion-text-center ion-padding">
+          <ion-card-title class="new-title">{{ news.title }}</ion-card-title>
+          <ion-card-subtitle class="new-subtitle">{{ news.author }} - {{ news.date | date:'shortDate'
+            }}</ion-card-subtitle>
         </ion-card-header>
+  
         <ion-card-content>
-          <ion-badge color="primary">{{ noticia.etiqueta }}</ion-badge>
-          <p>{{ noticia.descripcion }}</p>
-          <ion-button expand="full" color="secondary">Analizar Noticia</ion-button>
+          <div class="center-elements">
+            <ion-badge [color]="news.isTrue ? 'success' : 'danger'" class="news-badge">
+              {{ news.isTrue ? 'Verdadera' : 'Falsa' }}
+            </ion-badge>
+            <ion-note *ngIf="news.rating" class="news-rating">Calificación: {{ news.rating }}/5</ion-note>
+          </div>
         </ion-card-content>
-      </ion-card>
-    </ion-item>
+      </div>
+
+    </ion-card>
   </ion-list>
-  
-  <ion-segment (ionChange)="filtrarNoticias($event)">
-    <ion-segment-button value="politica">
-      <ion-label>Política</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="salud">
-      <ion-label>Salud</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="entretenimiento">
-      <ion-label>Entretenimiento</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-  
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+
 </ion-content>

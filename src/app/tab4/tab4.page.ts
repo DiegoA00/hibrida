@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import {
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent,
   IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonList,
   IonItem, IonBadge, IonButton, IonSegment, IonSegmentButton, IonLabel,
-  IonFab, IonFabButton, IonIcon,
+  IonFab, IonFabButton, IonIcon, IonNote,
   IonThumbnail
 } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
@@ -18,53 +20,62 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
     IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonList,
     IonItem, IonBadge, IonButton, IonSegment, IonSegmentButton, IonLabel,
     IonFab, IonFabButton, IonIcon, ExploreContainerComponent,
-    IonThumbnail
+    IonThumbnail, IonNote,
+    CommonModule
   ],
 })
 export class Tab4Page {
-  noticias = [
-    {
-      titulo: 'Noticia 1',
-      fuente: 'Fuente Ejemplo',
-      fecha: new Date(),
-      etiqueta: 'Confiable',
-      descripcion: 'Descripción breve de la noticia.',
-      imagen: 'https://via.placeholder.com/150',
-    },
-    {
-      titulo: 'Noticia 2',
-      fuente: 'Otra Fuente',
-      fecha: new Date(),
-      etiqueta: 'Posible Falsa',
-      descripcion: 'Otra descripción breve.',
-      imagen: 'https://via.placeholder.com/150',
-    },
-  ];
-  news = [
-    { title: 'Noticia 1', source: 'Fuente A', status: 'true', image: null },
-    { title: 'Noticia 2', source: 'Fuente B', status: 'false', image: null },
-    { title: 'Noticia 3', source: 'Fuente C', status: 'unknown', image: null },
-  ];
-  filteredNews = [...this.news];
+  newsList: any[] = []; // Lista completa de noticias
+  filteredNews: any[] = []; // Noticias filtradas para la búsqueda
 
-  constructor() { }
+  constructor(private router: Router) { }
 
+  ngOnInit() {
+    this.loadStaticNews();
+  }
 
-  filtrarNoticias(event: any) {
-    const filtro = event.detail.value;
-    console.log('Filtro seleccionado:', filtro);
-    // Implementar lógica de filtrado aquí
+  loadStaticNews() {
+    this.newsList = [
+      {
+        id: 1,
+        title: 'Noticia 1',
+        author: 'Autor 1',
+        date: new Date(),
+        image: 'https://placehold.co/300x150',
+        isTrue: true,
+        rating: 4.5
+      },
+      {
+        id: 2,
+        title: 'Noticia 2',
+        author: 'Autor 2',
+        date: new Date(),
+        image: 'https://placehold.co/300x150',
+        isTrue: false,
+        rating: 3
+      },
+      {
+        id: 3,
+        title: 'Noticia 3',
+        author: 'Autor 3',
+        date: new Date(),
+        image: 'https://placehold.co/300x150',
+        isTrue: true,
+        rating: 5
+      }
+    ];
+    this.filteredNews = this.newsList; // Inicialmente sin filtros
   }
 
   filterNews(event: any) {
     const query = event.target.value.toLowerCase();
-    this.filteredNews = this.news.filter(item =>
-      item.title.toLowerCase().includes(query)
+    this.filteredNews = this.newsList.filter(news =>
+      news.title.toLowerCase().includes(query) || news.author.toLowerCase().includes(query)
     );
   }
 
-  goToDetails(news: any) {
-    console.log('Navigating to details of', news);
+  goToDetail(news: any) {
+    this.router.navigate(['/tabs/tab2', news.id]); // Navega a la segunda vista con el ID de la noticia
   }
 }
 
