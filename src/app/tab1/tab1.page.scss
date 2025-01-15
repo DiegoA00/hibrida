@@ -1,9 +1,32 @@
 img {
-    width: 100vw;
-    height: 30vh;
-    object-fit: cover;
+  width: 100vw;
+  height: 30vh;
+  object-fit: cover;
 }
 
 ion-button {
-    margin: 0 auto;
+  margin: 0 auto;
+}
+
+ion-title {
+  color: #00cad7;
+  color: var(--ion-color-primary);
+}
+
+.centered-card {
+  text-align: center;
+  color: #000000;
+  font-size: 24px;
+  margin: 0;
+  padding: 20px;
+}
+
+.clue {
+  box-shadow: none;
+  border: none;
+  text-align: center;
+  color: #000;
+  font-size: 16px;
+  margin: 0;
+  padding: 10px;
 }

@@ -1,31 +1,67 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Acerca de
-    </ion-title>
+    <ion-title> ASL Detector </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-
   <ion-card>
     <ion-card-header>
-
-      <ion-card-title class="titulo">Descripción</ion-card-title>
-
+      <ion-card-title class="titulo"
+        >Detector de Lenguaje de Señas
+      </ion-card-title>
     </ion-card-header>
-
-    <ion-card-content>
-      <p id="descripcion">
-        Una aplicación móvil desarrollada en Angular Ionic es un software multiplataforma que utiliza el framework
-        Angular para construir la lógica y la estructura de la aplicación, junto con el framework Ionic para crear una
-        interfaz de usuario atractiva y funcional. Ionic proporciona componentes y herramientas para diseñar
-        aplicaciones que se sienten y se ven nativas en dispositivos iOS y Android. La aplicación se puede desplegar
-        tanto en la web como en tiendas de aplicaciones móviles. Utiliza tecnologías web como HTML, CSS y JavaScript, lo
-        que facilita la reutilización de código y la implementación rápida.
+    <ion-card-content class="ion-text-center">
+      <p>
+        Esta aplicación utiliza la IA de Teachable Machine para analizar
+        imágenes correspondientes al Lenguaje de Señas Americano (ASL) y
+        posteriormente indicar a qué letra se está refieriendo, para que las
+        personas con problemas auditivos se puedan comunicar fácilmente con
+        cualquier otra persona.
       </p>
+      <br />
     </ion-card-content>
-
   </ion-card>
 
+  <ion-card>
+    <ion-card-title class="titulo"> Imágenes de ejemplo </ion-card-title>
+
+    <ion-card-content class="ion-text-center">
+      <div class="group">
+        <p class="letter">Letra: A</p>
+        <img
+          src="https://i.ibb.co/wBqjLDn/hand1-a-bot-seg-1-cropped.jpg"
+          alt="signo para A"
+          class="sign-image"
+        />
+      </div>
+      <div class="group">
+        <p class="letter">Letra: B</p>
+        <img
+          src="https://i.ibb.co/KW4Pcjv/hand1-b-bot-seg-1-cropped.jpg"
+          alt="signo para B"
+          class="sign-image"
+        />
+      </div>
+      <div class="group">
+        <p class="letter">Letra: C</p>
+        <img
+          src="https://i.ibb.co/cvxDxYB/hand1-c-bot-seg-1-cropped.jpg"
+          alt="signo para C"
+          class="sign-image"
+        />
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content class="ion-text-center">
+      <p>Desarrollado por:</p>
+      <ul id="members">
+        <li>Leidy Barzola</li>
+        <li>Braulio Rivas</li>
+        <li>Diego Araujo</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

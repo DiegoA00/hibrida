@@ -1,37 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Teachable Machine
-    </ion-title>
+    <ion-title>American Sign Language Detector</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Teachable Machine</ion-title>
+      <ion-title size="large">American Sign Language Detector</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-card class="centered-card">
+    <p>Comienza a identificar la letra según el Lenguaje de Señas</p>
+  </ion-card>
+
+  <ion-card class="clue">
+    <p>
+      ¿Tienes dudas? Aprende el Lenguaje de Señas en la sección "Acerca de" y
+      prueba ASL Detector tú mismo!
+    </p>
+  </ion-card>
 
   <!-- CARGA DE IMAGEN - INICIO -->
   @if(imageReady()) {
   <ion-card>
-
     <img #image [src]="imageUrl()" alt="Imagen seleccionada" />
 
     <!-- CARGA DE PREDICCIÓN - INICIO -->
     @if(modelLoaded()) {
 
     <div class="ion-text-center ion-padding-top ion-padding-bottom">
-      <ion-button fill="outline" color="success" (click)="predict()">Predecir</ion-button>
+      <ion-button fill="outline" color="success" (click)="predict()"
+        >Predecir</ion-button
+      >
     </div>
 
     <ion-list>
       <ion-item>
-        <ion-label>Clases: {{ classLabels }} </ion-label>
+        <ion-label>Letra del abecedario en inglés</ion-label>
         @for (item of predictions; track $index) {
         <ion-item>
-          <ion-label> {{ item?.className }} : {{ item?.probability | percent }} </ion-label>
+          <ion-label>
+            {{ item?.className }} : {{ item?.probability | percent }}
+          </ion-label>
         </ion-item>
         }
       </ion-item>
@@ -39,18 +51,21 @@
 
     }
     <!-- CARGA DE PREDICCIÓN - FIN -->
-
   </ion-card>
   }
   <!-- CARGA DE IMAGEN - FIN -->
 
-
-  <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+  <input
+    #fileInput
+    type="file"
+    accept="image/*"
+    (change)="onFileSelected($event)"
+    hidden
+  />
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="center">
     <ion-fab-button (click)="fileInput.click()">
       <ion-icon name="cloud-upload-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>
